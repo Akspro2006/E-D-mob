@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sync Data</title>
+
+<!-- Import 8-bit font from Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+<style>
+    /* Basic reset and font */
+    body, html {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: gold;
+        position: relative;
+    }
+
+    /* Logo styling replaced with text */
+    .logo-text {
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        font-family: 'Press Start 2P', cursive;
+        font-size: 2.5em;
+        color: #d08948;
+        z-index: 10;
+    }
+
+    /* Centered container for popup and buttons */
+    .popup-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Pop-up container styling */
+    .popup {
+        background-image: url('txt1.png');
+        background-size: cover;
+        background-position: center;
+        width: 90%;
+        max-width: 400px;
+        height: 150px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        position: relative;
+        border-radius: 8px;
+        animation: popupAppear 0.5s ease-in-out;
+    }
+
+    /* Text styling within popup */
+    .popup p {
+        color: white;
+        font-size: 1.2em;
+        font-weight: bold;
+        margin: 0;
+        padding: 10px;
+    }
+
+    /* Button container styling */
+    .button-container {
+        display: flex;
+        gap: 10px;
+        margin-top: 15px;
+        justify-content: center;
+    }
+
+    /* Button styling with background image */
+    .button-container button {
+        background-image: url('txt1.png');
+        background-size: cover;
+        background-position: center;
+        width: 100px;
+        height: 40px;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .button-container button:hover {
+        opacity: 0.8;
+    }
+
+    /* Pixel fade-out animation */
+    @keyframes pixelateFadeOut {
+        0% {
+            opacity: 1;
+            filter: none;
+            transform: scale(1);
+        }
+        50% {
+            opacity: 0.5;
+            filter: blur(3px);
+            transform: scale(1.2);
+        }
+        100% {
+            opacity: 0;
+            filter: blur(10px);
+            transform: scale(1.4);
+        }
+    }
+
+    /* Shake in all directions */
+    @keyframes shakeAllDirections {
+        0% { transform: translate(0, 0); }
+        25% { transform: translate(-10px, 10px); }
+        50% { transform: translate(10px, -10px); }
+        75% { transform: translate(-10px, -10px); }
+        100% { transform: translate(10px, 10px); }
+    }
+
+    /* Color change animation */
+    @keyframes colorChange {
+        0% { color: #d08948; }    /* Original color */
+        33% { color: blue; }
+        66% { color: red; }
+        100% { color: #d08948; }
+    }
+
+    /* Animation for popup appearance */
+    @keyframes popupAppear {
+        0% { transform: scale(0.5); opacity: 0; }
+        100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* Message with shake and color change effect */
+    .sync-message {
+        font-size: 1em;
+        font-weight: bold;
+        margin-top: 15px;
+        display: none;
+        font-family: 'Press Start 2P', cursive;
+        text-align: center;
+        animation: shakeAllDirections 0.5s infinite ease-in-out, colorChange 1.5s infinite ease-in-out;
+    }
+
+</style>
+</head>
+<body>
+
+<!-- Replaced Logo with Text -->
+<div class="logo-text">E.D.</div>
+
+<!-- Centered container for popup and buttons -->
+<div class="popup-container" id="popupContainer">
+    <div class="popup" id="popup">
+        <p>Want to sync data and be perfect?</p>
+    </div>
+    <div class="button-container">
+        <button onclick="handleYes()">Yes</button>
+        <button onclick="handleMaybeLater()">Maybe later</button>
+    </div>
+</div>
+
+<p class="sync-message" id="syncMessage">Continue from a laptop to sync your data</p>
+
+<script>
+    function handleYes() {
+        const popupContainer = document.getElementById('popupContainer');
+        const syncMessage = document.getElementById('syncMessage');
+        
+        popupContainer.style.animation = 'pixelateFadeOut 1s forwards';
+        
+        setTimeout(() => {
+            popupContainer.style.display = 'none';
+            syncMessage.style.display = 'block';
+        }, 1000);
+    }
+
+    function handleMaybeLater() {
+        const popupContainer = document.getElementById('popupContainer');
+        
+        popupContainer.style.animation = 'pixelateFadeOut 1s forwards';
+        
+        setTimeout(() => {
+            popupContainer.style.display = 'none';
+        }, 1000);
+    }
+</script>
+
+</body>
+</html>
